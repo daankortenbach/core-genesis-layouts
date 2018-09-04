@@ -62,7 +62,18 @@ class GenesisLayout extends Core {
 		}
 
 		if ( array_key_exists( self::UNREGISTER, $this->config ) ) {
-			array_map( 'genesis_unregister_layout', $this->config[ self::UNREGISTER ] );
+			add_action( 'init', [ $this, 'unregister' ], 11 );
 		}
+	}
+	
+	/**
+	 * Unregister Genesis layout.
+	 *
+	 * @since 0.1.1
+	 *
+	 * @return array
+	 */
+	public function unregister() {
+		return array_map( 'genesis_unregister_layout', $this->config[ self::UNREGISTER ] );
 	}
 }
